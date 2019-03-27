@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.dao.AlienDao;
+import com.db.model.AlienName;
 import com.model.Alien;
 
 @Path("aliens")
@@ -24,7 +25,7 @@ public class AlienResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Alien getAlien() {
 		System.out.println("getAlien called");
-		Alien a = new Alien(1, "Vinay");
+		Alien a = new Alien(1, new AlienName("Vinay","Prabhakar","Chatra"),"brown");
 		return a;
 	}
 	
@@ -34,9 +35,9 @@ public class AlienResource {
 	public List<Alien> getAliens() {
 		System.out.println("getAliens called");
 		List<Alien> list = new ArrayList<>();
-		Alien a1 = new Alien(1, "Vinay");
+		Alien a1 = new Alien(1, new AlienName("Vinay","Prabhakar","Chatra"),"brown");
 		list.add(a1);
-		Alien a2 = new Alien(2, "Samrat");
+		Alien a2 = new Alien(2,  new AlienName("Samrat","lastname","middlename"),"brown");
 		list.add(a2);
 		return list;
 	}
@@ -70,7 +71,7 @@ public class AlienResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteAlien(@PathParam("id") int id) {
 		System.out.println("deleteAlien called");
-		Alien a = new Alien(id, "deleted alien");
+		Alien a = new Alien(id, new AlienName("deleted alien1","deleted alien2","deleted alien3"),"white");
 		return Response.ok(a).build();
 	}
 

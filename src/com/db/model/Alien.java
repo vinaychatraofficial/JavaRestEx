@@ -12,17 +12,16 @@ public class Alien {
 	
 	@Id
 	int id;
-	@Column(name="aname")
-	String name;
-	//@Transient
+	AlienName name;
 	String color;
 	
 	public Alien() {}
 	
-	public Alien(int id, String name) {
+	public Alien(int id, AlienName name,String color) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.color = color;
 	}
 
 	public int getId() {
@@ -33,11 +32,13 @@ public class Alien {
 		this.id = id;
 	}
 
-	public String getName() {
+	
+
+	public AlienName getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(AlienName name) {
 		this.name = name;
 	}
 

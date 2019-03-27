@@ -31,8 +31,7 @@ public class AlienDao {
 	public com.model.Alien getAlien(int id) {
 		Session session = sf.openSession();
 		Alien alien = (Alien)session.get(Alien.class, id);
-		com.model.Alien a = new com.model.Alien(alien.getId(), alien.getName());
-		a.setColor(alien.getColor());
+		com.model.Alien a = new com.model.Alien(alien.getId(), alien.getName(),alien.getColor());
 		return a;
 	}
 

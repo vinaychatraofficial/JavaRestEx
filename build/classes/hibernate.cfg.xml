@@ -13,6 +13,8 @@
         <property name="show_sql">true</property>
         
         <mapping class="com.db.model.Alien"/>
+        <mapping class="com.db.model.Student"/>
+        <mapping class="com.db.model.Laptop"/>
         
     </session-factory>
 </hibernate-configuration>

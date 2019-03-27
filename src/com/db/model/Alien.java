@@ -1,13 +1,20 @@
-package com.model;
+package com.db.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
+@Entity
+@Table(name="alien_table")
 public class Alien {
 	
+	@Id
 	int id;
+	@Column(name="aname")
 	String name;
+	//@Transient
 	String color;
 	
 	public Alien() {}

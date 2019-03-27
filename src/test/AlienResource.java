@@ -13,10 +13,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.dao.AlienDao;
 import com.model.Alien;
 
 @Path("aliens")
 public class AlienResource {
+	private AlienDao dao = new AlienDao();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -43,13 +45,14 @@ public class AlienResource {
 	@Path("{id}")
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Alien getAlien(@PathParam("id") int id) {
-		return new Alien(id,"some number");
+		return dao.getAlien(id);
 	}
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Alien createAlien(Alien a) {
 		System.out.println("Calling createAlien");
+		dao.createAlien(a);
 		return a;
 	}
 	

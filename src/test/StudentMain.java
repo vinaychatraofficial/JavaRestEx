@@ -1,5 +1,9 @@
 package test;
 
+import java.util.List;
+import java.util.Random;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -7,13 +11,28 @@ import org.hibernate.cfg.Configuration;
 
 import com.db.model.Laptop;
 import com.db.model.Student;
+import com.db.model.Student1;
 
 public class StudentMain {
 
 	public static void main(String[] args) {
-		getStudent();
+		//createStudents1();
+		getStudent1();
 	}
 	
+	private static void getStudent1() {
+		Configuration cfg = new Configuration().configure();
+		SessionFactory sf = cfg.buildSessionFactory();
+		
+		Session session = sf.openSession();
+		Query q = session.createQuery("from Student1 where marks>50");
+		List<Student1> list = q.list();
+		for(Student1 s:list) {
+			System.out.println(s);
+		}
+		
+	}
+
 	private static void getStudent() {
 		Configuration cfg = new Configuration().configure();
 		SessionFactory sf = cfg.buildSessionFactory();
@@ -55,6 +74,27 @@ public class StudentMain {
 		session.save(laptop1);
 		session.save(laptop2);
 		session.save(student);
+		
+		tx.commit();
+	}
+	
+	private static void createStudents() {
+		Configuration cfg = new Configuration().configure();
+		SessionFactory sf = cfg.buildSessionFactory();
+		
+		Session session = sf.openSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+		Random r = new Random();
+		
+		for(int i=1;i<=50;i++) {
+			Student1 s = new Student1();
+			s.setRollno(i);
+			s.setName("name "+i);
+			s.setMarks(r.nextInt(100));
+			session.save(s);
+		}
 		
 		tx.commit();
 	}

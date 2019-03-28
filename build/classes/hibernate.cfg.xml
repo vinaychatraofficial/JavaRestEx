@@ -15,6 +15,7 @@
         <mapping class="com.db.model.Alien"/>
         <mapping class="com.db.model.Student"/>
         <mapping class="com.db.model.Laptop"/>
+        <mapping class="com.db.model.Student1"/>
         
     </session-factory>
 </hibernate-configuration>

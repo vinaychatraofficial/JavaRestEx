@@ -1,9 +1,12 @@
 package test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -25,12 +28,33 @@ public class StudentMain {
 		SessionFactory sf = cfg.buildSessionFactory();
 		
 		Session session = sf.openSession();
-		Query q = session.createQuery("from Student1 where marks>50");
-		List<Student1> list = q.list();
+		Query q = session.createQuery("select rollno,name from Student1 where rollno=:a");
+		q.setParameter("a", 2);
+		/*List<Student1> list = q.list();
 		for(Student1 s:list) {
 			System.out.println(s);
-		}
+		}*/
+		/*List<Object[]> students = q.list();
+		for(Object[] student:students)
+			System.out.println(student[0]+","+student[1]);*/
+		Object[] student = (Object[]) q.uniqueResult();
+		System.out.println(student[0]+","+student[1]);
 		
+		SQLQuery query = session.createSQLQuery("select * from student where marks>60");
+		query.addEntity(Student1.class);
+		List<Student1> st = query.list();
+		
+		for(Student1 s:st)
+			System.out.println(s);
+		
+		SQLQuery query1 = session.createSQLQuery("select name,marks from student where marks>60");
+		query1.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		List students = query1.list();
+		for(Object o:students) {
+			Map m = (Map)o;
+			System.out.println(m.get("name")+","+m.get("marks"));
+		}
+			
 	}
 
 	private static void getStudent() {
